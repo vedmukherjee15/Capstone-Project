@@ -29,6 +29,10 @@ jobs:
 
       - name: run pipeline
         env:
-          CAPSTONE_TEST: ${{ secrets.CAPSTONE_TEST }}
+          # DagsHub (non-interactive auth for dagshub.init)
+          CAPSTONE_TEST: ${{ secrets.DAGSHUB_USER_TOKEN }}
+          # Optional: MLflow basic auth for DagsHub MLflow server
+          MLFLOW_TRACKING_USERNAME: ${{ secrets.DAGSHUB_USERNAME }}
+          MLFLOW_TRACKING_PASSWORD: ${{ secrets.DAGSHUB_USER_TOKEN }}
         run: |
           dvc repro
